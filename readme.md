@@ -162,8 +162,8 @@ Dashboard Web Server menampilkan laporan pengukuran kualitas transmisi secara *r
 
 | Gejala Masalah | Kemungkinan Penyebab | Solusi Teknis |
 | :--- | :--- | :--- |
-| **Gambar tidak muncul di Web** | Header `START_B64` atau Footer `~` terpotong | Pastikan jarak alat rapat dan RSSI memenuhi syarat threshold. |
-| **Pesan Serial `[DITOLAK]` muncul terus** | Nilai RSSI di bawah threshold saat alat rapat | Longgarkan `RSSI_THRESHOLD` pada ESP8266 dari `-45` ke `-50` atau `-55`. |
+| **Gambar tidak muncul di Web** | Header `START_B64` atau Footer `~` terpotong | Pastikan jarak alat tidak terlalu jauh dan RSSI memenuhi syarat threshold. |
+| **Pesan Serial `[DITOLAK]` muncul terus** | Nilai di bawah threshold saat alat rapat | Longgarkan `RSSI_THRESHOLD` pada ESP8266 dari `-45` ke `-50` atau `-55`. |
 | **Karakter acak pada Serial Receiver** | Baud rate tidak cocok / Logika terbalik | Samakan baud rate ($19200\text{ bps}$) dan set `SoftwareSerial vlcSerial(4, -1, false);`. |
 | **ESP32-CAM *Restart* saat Flash** | Lonjakan arus LED HPL (*Brownout*) | Pastikan Kapasitor $470\ \mu\text{F}$ terpasang rapat di jalur daya $5\text{V}$ & GND ESP32. |
 
