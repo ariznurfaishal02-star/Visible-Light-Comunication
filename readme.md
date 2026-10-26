@@ -41,7 +41,7 @@ Purwarupa ini merupakan **Sistem Transmisi Gambar Hibrida VLC-RF (Visible Light 
       │                                                         │
       ├── (UART Serial2 @ 19200 bps) ──> [ LED HPL 1W ] ───────┼──> (Kanal Optik)
       │                                                         │
-      └── (Low Power 2 dBm + Hidden Beacon) ──> [ ESP-NOW ] ────┼──> (Kanal RF)
+      └── (Low Power 2 dBm ) ──> [ ESP-NOW ] ────┼──> (Kanal RF)
                                                                 ▼
 [ Web Server Browser ] <── (JPEG Image + Metrics) <── [ ESP8266 Receiver ]
                                                                 │
