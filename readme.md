@@ -137,7 +137,7 @@ Instal pustaka berikut melalui **Tools > Manage Libraries**:
 2. **Koneksi Jaringan:**
    - Hubungkan HP atau Laptop ke hotspot Wi-Fi yang dipancarkan oleh receiver:
      - **SSID:** `VLC_Receiver_new`
-     - **Password:** `patriot81`
+     - **Password:** `123456789`
 3. **Buka Antarmuka Web:** Akses alamat IP `http://192.168.4.1` pada peramban web.
 4. **Kalibrasi Jarak (RSSI Thresholding):**
    - Dekatkan modul transmitter dan receiver ($\le 10\text{ cm}$) hingga berhadapan lurus.
