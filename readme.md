@@ -59,7 +59,7 @@ Purwarupa ini merupakan **Sistem Transmisi Gambar Hibrida VLC-RF (Visible Light 
 ## 🛠️ Spesifikasi Komponen 
 
 ### Blok Pemancar (Transmitter - ESP32-CAM)
-- Mikrokontroler ESP32-S3 / ESP32-CAM (Modul Kamera OV2640)
+- Mikrokontroler ESP32-S3 / ESP32-CAM (Modul Kamera OV2640/OV3660)
 - LED High Power Light (HPL) 1 Watt (Warna Putih)
 - Transistor MOSFET IRLZ44N (N-Channel Logic Level Drive)
 - Kapasitor Elektrolit $470\ \mu\text{F} / 25\text{V}$ (Buffer Tegangan / Anti-Brownout)
