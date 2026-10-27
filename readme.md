@@ -63,7 +63,7 @@ Purwarupa ini merupakan **Sistem Transmisi Gambar Hibrida VLC-RF (Visible Light 
 - LED High Power Light (HPL) 1 Watt (Warna Putih)
 - Transistor MOSFET IRLZ44N (N-Channel Logic Level Drive)
 - Kapasitor Elektrolit $470\ \mu\text{F} / 25\text{V}$ (Buffer Tegangan / Anti-Brownout)
-- Resistor: $100\ \Omega$ ($1\text{W}$), $330\ \Omega$, dan $10\text{ k}\Omega$
+- Resistor: 100 ohm, 330 ohm dan 10k ohm
 
 ### Blok Penerima (Receiver - ESP8266)
 - Mikrokontroler NodeMCU ESP8266 v3
@@ -91,8 +91,8 @@ Purwarupa ini merupakan **Sistem Transmisi Gambar Hibrida VLC-RF (Visible Light 
 | Komponen / Jalur | Pin ESP8266 / Op-Amp | Catatan Rangkaian |
 | :--- | :--- | :--- |
 | **Fotodioda BPW34** | Pin 2 Op-Amp (`1IN-`) | Pin Inverting LM358 |
-| **Pembagi Tegangan** | Pin 3 Op-Amp (`1IN+`) | 2x Resistor $10\text{ k}\Omega$ antara $3.3\text{ V}$ & GND ($\approx 1.65\text{ V}$) |
-| **Feedback Resistor** | Pin 1 ke Pin 2 Op-Amp | Resistor $10\text{ k}\Omega$ ($R_f$) menghubungkan Output ke Inverting |
+| **Pembagi Tegangan** | Pin 3 Op-Amp (`1IN+`) | 2x Resistor 10k ohm antara 3.3V & GND |
+| **Feedback Resistor** | Pin 1 ke Pin 2 Op-Amp | Resistor 10k ohm ($R_f$ menghubungkan Output ke Inverting |
 | **Output Op-Amp** | Pin 1 LM358 (`1OUT`) | Terhubung ke GPIO 4 (Pin D2 NodeMCU) |
 | **Pull-Up Resistor** | Pin D2 ke $3.3\text{ V}$ | Resistor $10\text{ k}\Omega$ untuk *noise immunity* |
 
