@@ -185,6 +185,6 @@ void loop() {
   digitalWrite(LED_TX_PIN, LOW);
 
   Serial.println("[4] Transmisi 100% Selesai!");
-  Serial.println("Menunggu 25 detik sebelum siklus berikutnya...\n");
-  delay(25000); 
+  Serial.println("Menunggu 10 detik sebelum siklus berikutnya...\n");
+  delay(10000); 
 }
