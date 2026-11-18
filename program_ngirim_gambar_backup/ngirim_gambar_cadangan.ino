@@ -24,7 +24,7 @@ void setup() {
   pinMode(LED_TX_PIN, OUTPUT);
   digitalWrite(LED_TX_PIN, LOW);
 
-  // Inisialisasi Kamera
+  // 1. Inisialisasi Hardware Kamera
   camera_config_t config;
   config.ledc_channel = LEDC_CHANNEL_0;
   config.ledc_timer   = LEDC_TIMER_0;
@@ -65,11 +65,11 @@ void setup() {
     s->set_hmirror(s, 1); 
   }
 
-  // Inisialisasi Wi-Fi & ESP-NOW (Hidden AP)
+  // 2. Inisialisasi Wi-Fi Hidden AP & ESP-NOW
   WiFi.mode(WIFI_AP_STA);
   WiFi.softAP("VLC_Beacon", "12345678", 1, 1); 
   
-  esp_wifi_set_max_tx_power(8); // Daya Wi-Fi minim (2 dBm)
+  esp_wifi_set_max_tx_power(8); // Daya Wi-Fi minimum (2 dBm)
 
   if (esp_now_init() == ESP_OK) {
     esp_now_peer_info_t peerInfo = {};
@@ -79,7 +79,7 @@ void setup() {
     esp_now_add_peer(&peerInfo);
   }
 
-  Serial.println("ESP32-CAM Transmitter Siap!");
+  Serial.println("ESP32-S3 Transmitter Siap!");
   delay(1000);
 }
 
@@ -122,13 +122,25 @@ void loop() {
   int totalLen = base64Image.length();
   esp_camera_fb_return(fb);
 
+  // JEDA PENEMPATAN ALAT: Waktu 6 detik untuk meluruskan Transmitter ke Receiver
+  Serial.println("[JEDA] Foto tersimpan! Posisikan Transmitter ke depan Receiver (6 detik)...");
+  delay(5000);
+
+  // Aba-aba kedip cepat 2 kali sebelum transmisi dimulai
+  for (int k = 0; k < 2; k++) {
+    digitalWrite(LED_TX_PIN, HIGH);
+    delay(100);
+    digitalWrite(LED_TX_PIN, LOW);
+    delay(100);
+  }
+  delay(600);
+
   // TAHAP 3: Transmisi Data
   Serial.println("[3] Memulai transmisi (UART 19200 bps & ESP-NOW)...");
   
-  // Aktifkan Hardware Serial2 di Pin GPIO 2
   Serial2.begin(19200, SERIAL_8N1, -1, LED_TX_PIN);
 
-  // 1. KIRIM HEADER PENGUNCI "START_B64"
+  // Kirim Header Pengunci "START_B64"
   myData.isEnd = false;
   strcpy(myData.chunk, "START_B64");
   esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
@@ -137,7 +149,7 @@ void loop() {
   Serial2.flush();
   delay(100);
 
-  // 2. KIRIM CHUNK DATA BASE64
+  // Kirim Potongan Data Base64
   int chunkSize = 190;
   int tenPercent = totalLen / 10;
   if (tenPercent == 0) tenPercent = 1;
@@ -147,19 +159,18 @@ void loop() {
     sub.toCharArray(myData.chunk, 200);
     myData.isEnd = false; 
 
-    // Kirim via ESP-NOW
     esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
 
-    // Kirim via Optik LED HPL
     Serial2.print(sub);
-    Serial2.flush(); 
+    Serial2.flush();
+    delay(10);
 
     if (i % tenPercent == 0 && i != 0) {
       Serial.printf("    Progres Transmisi: %d%%\n", (i / tenPercent) * 10);
     }
   }
 
-  // 3. KIRIM FOOTER PENUTUP "~"
+  // Kirim Footer Penutup "~"
   myData.isEnd = true;
   strcpy(myData.chunk, "~");
   esp_now_send(broadcastAddress, (uint8_t *) &myData, sizeof(myData));
@@ -168,12 +179,12 @@ void loop() {
   Serial2.flush();
   delay(100);
 
-  // Matikan Serial2 agar LED padam saat menganggur
+  // Matikan Serial2 agar LED padam total saat menganggur
   Serial2.end();
   pinMode(LED_TX_PIN, OUTPUT);
   digitalWrite(LED_TX_PIN, LOW);
 
   Serial.println("[4] Transmisi 100% Selesai!");
-  Serial.println("Menunggu 8 detik sebelum siklus berikutnya...\n");
-  delay(8000); 
+  Serial.println("Menunggu 25 detik sebelum siklus berikutnya...\n");
+  delay(25000); 
 }
