@@ -123,7 +123,7 @@ void loop() {
   esp_camera_fb_return(fb);
 
   // JEDA PENEMPATAN ALAT: Waktu 6 detik untuk meluruskan Transmitter ke Receiver
-  Serial.println("[JEDA] Foto tersimpan! Posisikan Transmitter ke depan Receiver (6 detik)...");
+  Serial.println("[JEDA] Foto tersimpan! Posisikan Transmitter ke depan Receiver (5 detik)...");
   delay(5000);
 
   // Aba-aba kedip cepat 2 kali sebelum transmisi dimulai
